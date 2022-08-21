@@ -1,7 +1,10 @@
 name: Java CI with Maven
 
 on:
-  [push]
+  push:
+    branches: [ exerciseOne ]
+  pull_request:
+    branches: [ exerciseOne ]
 
 jobs:
   build:
@@ -11,9 +14,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 11
-      uses: actions/setup-java@v2
+      uses: actions/setup-java@v1
       with:
-        java-version: '11'
-        distribution: 'adopt'
+        java-version: 11
     - name: Build with Maven
-      run: mvn -B -e verify
+      run: mvn -B package --file pom.xml
